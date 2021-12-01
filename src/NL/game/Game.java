@@ -33,6 +33,8 @@ public class Game {
             Numbers game2 = new Numbers();
             game2.test();
         }
+
+        whichPlayerAnswer();
     }
 
     public void playerVSPlayer() {
@@ -50,7 +52,18 @@ public class Game {
         players[1] = new User("AI");
     }
 
+
     public void exit() {
         System.exit(0);
+    }
+
+    public void whichPlayerAnswer(){
+        userInteraction.displayWhichPlayerAnswer();
+        String name = userInteraction.getUserChoice();
+        menu.manageWhichPlayerAnswer(name, players[0].getPlayer(), players[1].getPlayer(), this);
+    }
+
+    public void playerAnswer(int choice){
+        players[choice].setAnswer("Test");
     }
 }

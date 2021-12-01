@@ -53,6 +53,18 @@ public class UserInteraction {
         System.out.print("Please select your option : ");
     }
 
+    public void displayWhichPlayerAnswer() {
+//        System.out.println("\nWould you like to play against a friend or the game AI ?");
+//
+//        int number = 1;
+//        for(String option : playerOptions) {
+//            System.out.println("For " + option + ", please enter \"" + number++ + "\".");
+//        }
+//        System.out.print("Please select your option : ");
+
+        //Qui veut commencer
+    }
+
     public void askUsername() {
         System.out.print("\nPlease enter the name of the second player : ");
     }
