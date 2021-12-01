@@ -7,7 +7,7 @@ public class Game {
 
     UserInteraction userInteraction = new UserInteraction();
     Menu menu = new Menu();
-    User[] player = new User[2];
+    User[] players = new User[2];
 
     public void gameWelcome() {
         userInteraction.display(menu.getWelcomeMsg());
@@ -39,15 +39,15 @@ public class Game {
         for(int p = 0; p <= 1; p++) {
             userInteraction.askUsername();
             String playerName = userInteraction.getUserChoice();
-            player[p] = new User(playerName);
+            players[p] = new User(playerName);
         }
     }
 
     public void playerVSAI() {
         userInteraction.askUsername();
         String playerName = userInteraction.getUserChoice();
-        player[0] = new User(playerName);
-        player[1] = new User("AI");
+        players[0] = new User(playerName);
+        players[1] = new User("AI");
     }
 
     public void exit() {
