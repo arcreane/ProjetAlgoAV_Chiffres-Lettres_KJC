@@ -1,4 +1,4 @@
-package NL.game.logic;
+package NL.game;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,12 +11,13 @@ public class Dictionary {
 
     List<String> dictionary = new ArrayList<>();
 
-    public void initDictionary() {
-
+    public void initContent() {
         String os_path = "src/french_list";
 
         try (BufferedReader scan = new BufferedReader(new FileReader(os_path))) {
                 dictionary = scan.lines().collect(Collectors.toList());
-        } catch (IOException ignore) { }
+        } catch (IOException e) {
+            System.out.println("Bruh");
+        }
     }
 }
