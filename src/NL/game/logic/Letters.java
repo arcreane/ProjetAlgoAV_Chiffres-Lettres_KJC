@@ -5,54 +5,65 @@ import java.util.List;
 import java.util.Random;
 
 public class Letters {
-    public static List<Character> letters = new ArrayList<Character>();
-    public static List<Character> checkValidityWordsForUserOne = new ArrayList<Character>();
-    public static List<Character> checkValidityWordsForUserTwo = new ArrayList<Character>();
+    public static List<Character> listSortedLetters = new ArrayList<Character>();
+    public static List<Character> listCharsFromUserOneWord = new ArrayList<Character>();
+    public static List<Character> listCharsFromUserTwoWord = new ArrayList<Character>();
     String wordCreatedByUserOne;
     String wordCreatedByUserTwo;
 
 
 
     public List<Character> getLetters() {
-        return letters;
+        return listSortedLetters;
     }
 
 
+// --------------------- SORT RANDOM CHARACTER (CONSONANT/VOWEL) -------------
+// ---------------------- DEPENDANT FOREACH USERS CHOICE --------------------
 
-
-    public void checkTypeOfLetter(String letter) {
-        String chars = "bcdfghjklmnpqrstvwxz";
+    public void creatingRandomCharsFromAskingEachPlayer(String letter) {
+        String consonants = "bcdfghjklmnpqrstvwxz";
         String vowels = "aeiouy";
-        Random vowel = new Random();
+        Random randomChars = new Random();
 
         if (letter.equals("consonne")){
-            char c = chars.charAt(vowel.nextInt(chars.length()));
-            letters.add(c);
+            char randomConsonant = consonants.charAt(randomChars.nextInt(consonants.length()));
+            listSortedLetters.add(randomConsonant);
         }
         else if (letter.equals("voyelle")){
-            char v = vowels.charAt(vowel.nextInt(vowels.length()));
-            letters.add(v);
+            char randomVowel = vowels.charAt(randomChars.nextInt(vowels.length()));
+            listSortedLetters.add(randomVowel);
         }
 
     }
+    // --------------------------------------------------------------------------
 
-    public void wordFoundedByUserOne(String word){
-        System.out.println(letters);
+
+
+    // -------------------- GET WORD CREATED FOREACH USER ------------------------
+
+    public void getCreatedWordByUserOne(String word){
+        System.out.println(listSortedLetters);
         wordCreatedByUserOne = (word);
+        // Add the word entered by the userOne in a list for Each character in the word
         for (int i = 0; i < wordCreatedByUserOne.length(); i++){
-            checkValidityWordsForUserOne.add(wordCreatedByUserOne.charAt(i));
+            listCharsFromUserOneWord.add(wordCreatedByUserOne.charAt(i));
         }
 
-        checkValidWordForUserOne();
+        checkValidityWordComparedListForUserOne();
     }
-    public void wordFoundedByUserTwo(String word) {
-        System.out.println(letters);
+    public void getCreatedWordByUserTwo(String word) {
+        System.out.println(listSortedLetters);
         wordCreatedByUserTwo = (word);
+        // Add the word entered by the userTwo in a list for Each character in the word
         for (int i = 0; i < wordCreatedByUserTwo.length(); i++){
-            checkValidityWordsForUserTwo.add(wordCreatedByUserTwo.charAt(i));
+            listCharsFromUserTwoWord.add(wordCreatedByUserTwo.charAt(i));
         }
-        checkValidWordForUserTwo();
+        checkValidityWordComparedListForUserTwo();
     }
+    // -------------------------------------------------------------------------------------
+
+    // ----- LOOKING FOR LONGEST WORD CREATED BY USERS TO DETERMINED WINNER ---------------
 
     public void checkLenghtOfWord(){
         if (wordCreatedByUserOne.length() == wordCreatedByUserTwo.length()){
@@ -67,32 +78,62 @@ public class Letters {
         }
     }
 
-    public void checkValidWordForUserOne(){
+
+    //----------------------- CHECKING IF CHARACTERS IN SORTED CHARACTERS LIST ----------
+    // ---------------------------------------- USER ONE -------------------------------
+
+    public void checkValidityWordComparedListForUserOne(){
         for (int i = 0; i < wordCreatedByUserOne.length(); i++){
             //letters.size() == checkValidityWordsForUserOne.stream().distinct().count()
-            if (letters.contains(checkValidityWordsForUserOne.get(i)) && checkValidityWordsForUserOne.size() < letters.size()){
-                System.out.println("good");
+            if (listSortedLetters.contains(listCharsFromUserOneWord.get(i)) && listCharsFromUserOneWord.size() < listSortedLetters.size()){
+                System.out.println("noProblemOne");
             }
             else {
-                System.out.println("nope");
+                System.out.println("1 Les caractères rentrés ne sont pas présents");
+                break;
             }
 
         }
     }
 
-    public void checkValidWordForUserTwo(){
+    //----------------------- CHECKING IF CHARACTERS IN SORTED CHARACTERS LIST ----------
+    // ---------------------------------------- USER TWO -------------------------------
+
+    public void checkValidityWordComparedListForUserTwo(){
         for (int i = 0; i < wordCreatedByUserTwo.length(); i++){
             //letters.size() == checkValidityWordsForUserTwo.stream().distinct().count()
-            if (letters.contains(checkValidityWordsForUserTwo.get(i)) && checkValidityWordsForUserTwo.size() < letters.size()){
-                System.out.println("good2");
+            if (listSortedLetters.contains(listCharsFromUserTwoWord.get(i)) && listCharsFromUserTwoWord.size() < listSortedLetters.size()){
+                System.out.println("noProblemTwo");
             }
             else {
-                System.out.println("nope2");
+                System.out.println("2 Les caractères rentrés ne sont pas présents");
+                break;
             }
 
         }
     }
 
+
+    // TODO algo checking if words is TRUE
+    public void checkIfWordUserOneExistsInDict(){
+       // dict.contains(wordCreatedByUserOne);
+    }
+    public void checkIfWordUserTwoExistsInDict(){
+        // dict.contains(wordCreatedByUserTwo);
+    }
+
+
+
+    //TODO AlGO AI FOR the longest word possible with characters sorted
+
+
+
+
+
+
+
+
+    //------------------------------------------------------------
 
     public void getLetters(String str) {
         System.out.println(str);
