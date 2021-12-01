@@ -83,4 +83,22 @@ public class UserInteraction {
         // Limit the number of characters.
         return input.nextLine();
     }
+
+
+    public void askUserOneVowelOrKonsonant(){
+        System.out.println("What kind of letter do you want ?\n");
+    }
+
+    public void askUserTwoVowelOrKonsonant(){
+        System.out.println("What kind of letter do you want ?\n");
+    }
+
+
+
+
+
+
+
+
+
 }

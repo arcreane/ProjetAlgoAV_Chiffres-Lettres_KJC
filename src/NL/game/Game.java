@@ -3,6 +3,8 @@ package NL.game;
 import NL.game.logic.Letters;
 import NL.game.logic.Numbers;
 
+import static NL.game.logic.Letters.letters;
+
 public class Game {
 
     UserInteraction userInteraction = new UserInteraction();
@@ -25,14 +27,33 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-        for(int turn = 1; turn <= 3; turn++) {
+        Letters game1 = new Letters();
+        for(int turn = 1; turn <= 5; turn++) {
 
-            Letters game1 = new Letters();
-            game1.test();
 
-            Numbers game2 = new Numbers();
-            game2.test();
+            userInteraction.askUserOneVowelOrKonsonant();
+            game1.checkTypeOfLetter((userInteraction.getStr()));
+            userInteraction.askUserTwoVowelOrKonsonant();
+            game1.checkTypeOfLetter((userInteraction.getStr()));
         }
+
+        System.out.println(letters);
+        System.out.println("word");
+        game1.wordFoundedByUserOne(userInteraction.getStr());
+        System.out.println(letters);
+        game1.wordFoundedByUserTwo(userInteraction.getStr());
+        game1.checkLenghtOfWord();
+
+
+
+
+
+            //game1.test(players);
+
+
+//            Numbers game2 = new Numbers();
+//            game2.test();
+
     }
 
     public void playerVSPlayer() {
