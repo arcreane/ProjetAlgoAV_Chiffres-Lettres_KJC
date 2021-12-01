@@ -1,8 +1,9 @@
 package NL.game;
 
 import NL.game.logic.Letters;
+import NL.game.logic.Numbers;
 
-import static NL.game.logic.Letters.listSortedLetters;
+import static NL.game.logic.Letters.letters;
 
 public class Game {
 
@@ -27,24 +28,20 @@ public class Game {
         menu.manageSubChoice(choice, this);
 
         Letters game1 = new Letters();
-        // First loop for gameLoop
-
-
-
-
-        // loop for getting 10 characters
         for(int turn = 1; turn <= 5; turn++) {
+
+
             userInteraction.askUserOneVowelOrKonsonant();
-            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+            game1.checkTypeOfLetter((userInteraction.getStr()));
             userInteraction.askUserTwoVowelOrKonsonant();
-            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+            game1.checkTypeOfLetter((userInteraction.getStr()));
         }
 
-        System.out.println(listSortedLetters);
+        System.out.println(letters);
         System.out.println("word");
-        game1.getCreatedWordByUserOne(userInteraction.getStr());
-        System.out.println(listSortedLetters);
-        game1.getCreatedWordByUserTwo(userInteraction.getStr());
+        game1.wordFoundedByUserOne(userInteraction.getStr());
+        System.out.println(letters);
+        game1.wordFoundedByUserTwo(userInteraction.getStr());
         game1.checkLenghtOfWord();
 
 
