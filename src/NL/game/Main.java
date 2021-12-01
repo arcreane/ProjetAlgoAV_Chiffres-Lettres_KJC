@@ -1,8 +1,8 @@
 package NL.game;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Menu menu = new Menu();
-        menu.welcome();
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.gameWelcome();
     }
 }
