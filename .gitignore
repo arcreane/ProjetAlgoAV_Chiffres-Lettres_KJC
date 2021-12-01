@@ -17,6 +17,7 @@ bin/
 .metadata/
 
 # IntelliJ
+out/
 .idea/
 *.iml
 *.ipr
