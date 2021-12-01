@@ -1,7 +1,8 @@
 package NL.game;
 
 import NL.game.logic.Letters;
-import NL.game.logic.Numbers;
+
+import static NL.game.logic.Letters.listSortedLetters;
 
 public class Game {
 
@@ -25,14 +26,37 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-        for(int turn = 1; turn <= 3; turn++) {
+        Letters game1 = new Letters();
+        // First loop for gameLoop
 
-            Letters game1 = new Letters();
-            game1.test();
 
-            Numbers game2 = new Numbers();
-            game2.test();
+
+
+        // loop for getting 10 characters
+        for(int turn = 1; turn <= 5; turn++) {
+            userInteraction.askUserOneVowelOrKonsonant();
+            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+            userInteraction.askUserTwoVowelOrKonsonant();
+            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
         }
+
+        System.out.println(listSortedLetters);
+        System.out.println("word");
+        game1.getCreatedWordByUserOne(userInteraction.getStr());
+        System.out.println(listSortedLetters);
+        game1.getCreatedWordByUserTwo(userInteraction.getStr());
+        game1.checkLenghtOfWord();
+
+
+
+
+
+            //game1.test(players);
+
+
+//            Numbers game2 = new Numbers();
+//            game2.test();
+
     }
 
     public void playerVSPlayer() {
