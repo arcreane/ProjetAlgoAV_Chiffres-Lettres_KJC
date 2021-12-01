@@ -50,7 +50,23 @@ public class UserInteraction {
         for(String option : subOptions) {
             System.out.println("For " + option + ", please enter \"" + number++ + "\".");
         }
-        System.out.print("Please select your option : ");
+        System.out.print("\nPlease select your option : ");
+    }
+
+    public void displayNumbersMenu() {
+        System.out.println("""
+
+                Please select the rank number you want, you will need a total of 6 plates collectively.
+                Each player will select 1 plate one after one other.
+                +----------------------------------------------------------+""");
+
+        System.out.println("For the rank 1, there are 20 plates from 1 to 10 with /search the word doublon/");
+        System.out.println("For the rank 2, there is 2 plates of 25 and 2 plates of 50.");
+        System.out.println("For the rank 3, there is 2 plates of 75 and 2 plates of 100.");
+    }
+
+    public void displaySelectOption() {
+        System.out.print("\nPlease select your option : ");
     }
 
     public void askUsername() {
@@ -64,7 +80,7 @@ public class UserInteraction {
             try {
                 inputVerified = Integer.parseInt(input.nextLine());
                 if (inputVerified < 1 || inputVerified > optionsMax) {
-                    System.out.println(ANSI_RED + "\nThe number provided doesn't match the options [1 or 2]." +
+                    System.out.println(ANSI_RED + "\nThe number provided doesn't match the options [1 or " + optionsMax + "]." +
                             "\nPlease try again.\n" + ANSI_RESET);
                     System.out.print("Please select your option : ");
                     inputVerified = -1;

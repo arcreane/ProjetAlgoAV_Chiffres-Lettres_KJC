@@ -8,6 +8,7 @@ public class Game {
     UserInteraction userInteraction = new UserInteraction();
     Menu menu = new Menu();
     User[] players = new User[2];
+    Numbers numbers = new Numbers();
 
     public void gameWelcome() {
         userInteraction.display(menu.getWelcomeMsg());
@@ -25,14 +26,17 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-        for(int turn = 1; turn <= 3; turn++) {
+//        for(int turn = 1; turn <= 3; turn++) {
+            userInteraction.displayNumbersMenu();
 
-            Letters game1 = new Letters();
-            game1.test();
+            for(int plates = 1; plates <= 6; plates++) {
+                userInteraction.displaySelectOption();
+                int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
+                menu.managePlateChoice(rank, this);
+            }
+//        }
 
-            Numbers game2 = new Numbers();
-            game2.test();
-        }
+        numbers.printPlates(); // DEBUG
     }
 
     public void playerVSPlayer() {

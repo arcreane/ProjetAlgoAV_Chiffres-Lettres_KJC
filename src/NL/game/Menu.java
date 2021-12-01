@@ -4,6 +4,7 @@ public class Menu {
 
     public static final String[] mainOptions = new String[]{"Play", "Exit"};
     public static final String[] subOptions = new String[]{"Player vs AI", "Player vs Player"};
+    public static final String[] numberPlates = new String[] {"Rang 1", "Rang 2", "Rang 3"};
 
     public String getWelcomeMsg() {
         return
@@ -32,6 +33,14 @@ public class Menu {
         switch (choice) {
             case 1 -> { game.playerVSAI(); }
             case 2 -> { game.playerVSPlayer(); }
+        }
+    }
+
+    public void managePlateChoice(int choice, Game game) {
+        switch (choice) {
+            case 1 -> game.numbers.addPlates(game.numbers.setPlates(1));
+            case 2 -> game.numbers.addPlates(game.numbers.setPlates(2));
+            case 3 -> game.numbers.addPlates(game.numbers.setPlates(3));
         }
     }
 }
