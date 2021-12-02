@@ -1,6 +1,5 @@
 package NL.game;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInteraction {
@@ -10,7 +9,6 @@ public class UserInteraction {
     Scanner input = new Scanner(System.in);
     int menuInput;
     String strInput;
-    String str;
 
     public int getUserChoice(int optionsMax) {
         return menuInput = validateIntegerInput(optionsMax);
@@ -18,10 +16,6 @@ public class UserInteraction {
 
     public String getUserChoice() {
         return strInput = validateStringInput();
-    }
-
-    public String getStr() {
-        return str = input.nextLine();
     }
 
     public void display(String welcomeMsg) {
@@ -60,7 +54,7 @@ public class UserInteraction {
                 Each player will select 1 plate one after one other.
                 +----------------------------------------------------------+""");
 
-        System.out.println("For the rank 1, there are 20 plates from 1 to 10 with /search the word doublon/");
+        System.out.println("For the rank 1, there are 20 plates from 1 to 10 with their corresponding duplicate.");
         System.out.println("For the rank 2, there is 2 plates of 25 and 2 plates of 50.");
         System.out.println("For the rank 3, there is 2 plates of 75 and 2 plates of 100.");
     }
@@ -98,5 +92,9 @@ public class UserInteraction {
     public String validateStringInput() {
         // Limit the number of characters.
         return input.nextLine();
+    }
+
+    public void emptyPlates(String rank) {
+        System.out.println(ANSI_RED +  "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
     }
 }

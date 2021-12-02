@@ -16,9 +16,7 @@ public class Dictionary {
 
         try (BufferedReader scan = new BufferedReader(new FileReader(os_path))) {
                 dictionary = scan.lines().collect(Collectors.toList());
-        } catch (IOException e) {
-            System.out.println("Bruh");
-        }
+        } catch (IOException ignore) { }
     }
 
     //Init the dictionary content.

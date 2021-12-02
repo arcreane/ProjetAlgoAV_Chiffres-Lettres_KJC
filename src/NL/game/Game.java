@@ -1,6 +1,6 @@
 package NL.game;
 
-import NL.game.logic.Letters;
+//import NL.game.logic.Letters;
 import NL.game.logic.Numbers;
 
 public class Game {
@@ -26,17 +26,14 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-//        for(int turn = 1; turn <= 3; turn++) {
-            userInteraction.displayNumbersMenu();
+        userInteraction.displayNumbersMenu();
 
-            for(int plates = 1; plates <= 6; plates++) {
-                userInteraction.displaySelectOption();
-                int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
-                menu.managePlateChoice(rank, this);
-            }
-//        }
-
-        numbers.printPlates(); // DEBUG
+        int plates = 1;
+        while(plates <= 6) {
+            userInteraction.displaySelectOption();
+            int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
+            plates += menu.managePlateChoice(rank, this);
+        }
     }
 
     public void playerVSPlayer() {

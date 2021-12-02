@@ -1,5 +1,7 @@
 package NL.game;
 
+import NL.game.logic.Numbers;
+
 public class Menu {
 
     public static final String[] mainOptions = new String[]{"Play", "Exit"};
@@ -24,23 +26,33 @@ public class Menu {
 
     public void manageMainChoice(int choice, Game game) {
         switch (choice) {
-            case 1 -> { game.start(); }
-            case 2 -> { game.exit(); }
+            case 1 -> game.start();
+            case 2 -> game.exit();
         }
     }
 
     public void manageSubChoice(int choice, Game game) {
         switch (choice) {
-            case 1 -> { game.playerVSAI(); }
-            case 2 -> { game.playerVSPlayer(); }
+            case 1 -> game.playerVSAI();
+            case 2 -> game.playerVSPlayer();
         }
     }
 
-    public void managePlateChoice(int choice, Game game) {
+    public int managePlateChoice(int choice, Game game) {
+        int len = 0;
         switch (choice) {
-            case 1 -> game.numbers.addPlates(game.numbers.setPlates(1));
-            case 2 -> game.numbers.addPlates(game.numbers.setPlates(2));
-            case 3 -> game.numbers.addPlates(game.numbers.setPlates(3));
+            case 1 -> len = Numbers.rank1.size();
+            case 2 -> len = Numbers.rank2.size();
+            case 3 -> len = Numbers.rank3.size();
+            default -> {}
         }
+        
+        if(len == 0) {
+            game.userInteraction.emptyPlates("rank " + choice);
+            return 0;
+        }
+        else game.numbers.addPlates(game.numbers.setPlates(choice));
+        
+        return 1;
     }
 }

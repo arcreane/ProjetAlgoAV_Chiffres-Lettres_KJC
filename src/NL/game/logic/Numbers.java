@@ -1,45 +1,70 @@
 package NL.game.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Numbers {
 
     List<Integer> plates = new ArrayList<>();
-    Integer[] rank1 = new Integer[] {1,2,3,4,5,6,7,8,9};
-    Integer[] rank2 = new Integer[] {25,50};
-    Integer[] rank3 = new Integer[] {75,100};
 
+    public static List<Integer> rank1 = new ArrayList<>()
+    {{ for(int numbers = 1; numbers < 9; numbers++) { add(numbers); add(numbers); } }};
 
-    public void test() {
-        System.out.println("I'm the numbers game");
-        // It's a test, you will need to remove it.
-    }
+    public static List<Integer> rank2 = new ArrayList<>()
+    {{ for(int numbers = 25; numbers <= 50; numbers = numbers + 25) { add(numbers); add(numbers); } }};
+
+    public static List<Integer> rank3 = new ArrayList<>()
+    {{ for(int numbers = 75; numbers <= 100; numbers = numbers + 25) { add(numbers); add(numbers); } }};
+
+    int randomNumber = utilsRand(100,999);
 
     public void addPlates(int number) {
         plates.add(number);
     }
 
-    public void printPlates() {
-        System.out.println(plates);
-    }
-
     public int setPlates(int number) {
+        int validatedRand = -1;
+        int selectedRand;
+
         switch (number) {
-            case 1 -> { return rank1[utilsRand(9)]; }
-            case 2 -> { return rank2[utilsRand(1)]; }
-            case 3 -> { return rank3[utilsRand(1)]; }
+            case 1 -> {
+                while(validatedRand == -1) {
+                    selectedRand = rank1.get(utilsRand(0,rank1.size() -1));
+                    validatedRand = utilsLimitDuplicate(selectedRand);
+                }
+                return validatedRand; }
+            case 2 -> {
+                while(validatedRand == -1) {
+                    selectedRand = rank2.get(utilsRand(0, rank2.size() - 1));
+                    validatedRand = utilsLimitDuplicate(selectedRand);
+                }
+                return validatedRand; }
+            case 3 -> {
+                while(validatedRand == -1) {
+                    selectedRand = rank3.get(utilsRand(0,rank3.size() - 1));
+                    validatedRand = utilsLimitDuplicate(selectedRand);
+                }
+                return validatedRand; }
         }
         return 0;
     }
 
-    private int utilsRand(int max) {
-        if (0 >= max) {
-            throw new IllegalArgumentException("max must be greater than 0");
+    private int utilsLimitDuplicate(Integer selectedRand) {
+
+        if      (rank1.contains(selectedRand)) rank1.remove(selectedRand);
+        else if (rank2.contains(selectedRand)) rank2.remove(selectedRand);
+        else if (rank3.contains(selectedRand)) rank3.remove(selectedRand);
+        else return -1;
+
+        return selectedRand;
+    }
+
+    private int utilsRand(int min, int max) {
+
+        if (min > max) {
+            throw new IllegalArgumentException("max must be greater than min");
         }
 
         Random rand = new Random();
-        return rand.nextInt((max) + 1);
+        return rand.nextInt((max - min) + 1) + min;
     }
 }
