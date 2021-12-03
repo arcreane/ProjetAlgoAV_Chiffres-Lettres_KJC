@@ -86,11 +86,13 @@ public class UserInteraction {
 
 
     public void askUserOneVowelOrKonsonant(){
-        System.out.println("What kind of letter do you want ?\n");
+        System.out.println("playerOne " + "What kind of letter do you want ?\n"); //TODO make player one dynamique
+        System.out.println("write consonant or vowel");
     }
 
     public void askUserTwoVowelOrKonsonant(){
-        System.out.println("What kind of letter do you want ?\n");
+        System.out.println("player Two "+ " What kind of letter do you want ?\n"); //TODO make player Two dynamique
+        System.out.println("write consonant or vowel");
     }
 
 

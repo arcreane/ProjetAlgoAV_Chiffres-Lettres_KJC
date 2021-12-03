@@ -1,21 +1,25 @@
 package NL.game;
 
+import NL.game.logic.Letters;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Dictionary {
+    //public static List<String> dictionary = new ArrayList<>();
+    public static ArrayList<String> dictionaryArray = new ArrayList<String>();
+    List<Character> test = new ArrayList<Character>();
 
-    List<String> dictionary = new ArrayList<>();
-
-    public void initContent() {
+    public static void initContent() {
         String os_path = "src/french_list.txt";
 
         try (BufferedReader scan = new BufferedReader(new FileReader(os_path))) {
-                dictionary = scan.lines().collect(Collectors.toList());
+            dictionaryArray = (ArrayList<String>) scan.lines().collect(Collectors.toList()); //dictionary
         } catch (IOException e) {
             System.out.println("Bruh");
         }

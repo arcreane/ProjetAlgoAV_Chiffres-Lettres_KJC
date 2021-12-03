@@ -2,9 +2,13 @@ package NL.game;
 
 import NL.game.logic.Letters;
 
-import static NL.game.logic.Letters.listSortedLetters;
+import java.util.ArrayList;
+
+import static NL.game.Dictionary.dictionaryArray;
+import static NL.game.logic.Letters.*;
 
 public class Game {
+    int rounds = 0;
 
     UserInteraction userInteraction = new UserInteraction();
     Menu menu = new Menu();
@@ -26,26 +30,42 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-        Letters game1 = new Letters();
+
         // First loop for gameLoop
+        Letters game1 = new Letters();
+        do {
+            new Letters();
+
+            //-------- loop for getting 10 characters ----------
+            loopForChoosingVowelOrConsonant(game1);
+
+
+            // --------------------------------------------------------
+            game1.loopWordsDictionary();
+//            //loop on words of dictionnary
+//            for (String word : dictionaryArray ){
+//                if ( word.length() <= listSortedCharacters.size() ) {
+//                    ArrayList<String> temp = new ArrayList<String>(listSortedCharacters) ;
+//                    if (canBeWritten(temp, word))
+//                        wordsCanBeWritten.add(word) ;
+//                }
+//            }
+//            System.out.println("words can be written with these characters :  "+ wordsCanBeWritten) ;
 
 
 
 
-        // loop for getting 10 characters
-        for(int turn = 1; turn <= 5; turn++) {
-            userInteraction.askUserOneVowelOrKonsonant();
-            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
-            userInteraction.askUserTwoVowelOrKonsonant();
-            game1.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
-        }
 
-        System.out.println(listSortedLetters);
-        System.out.println("word");
-        game1.getCreatedWordByUserOne(userInteraction.getStr());
-        System.out.println(listSortedLetters);
-        game1.getCreatedWordByUserTwo(userInteraction.getStr());
-        game1.checkLenghtOfWord();
+
+
+            // ----------- getting each word from each user ------------------
+            getDataWordForEachUser(game1);
+
+
+
+            rounds++;
+            System.out.println(rounds);
+        } while (rounds <3);
 
 
 
@@ -77,4 +97,35 @@ public class Game {
     public void exit() {
         System.exit(0);
     }
+
+
+
+    public void loopForChoosingVowelOrConsonant(Letters game){
+        for(int turn = 1; turn <= 5; turn++) {
+            userInteraction.askUserOneVowelOrKonsonant();
+            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+            userInteraction.askUserTwoVowelOrKonsonant();
+            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+        }
+    }
+    public void getDataWordForEachUser(Letters game){
+        //game1.cloneList();
+        //listSortedLetters = clonedListSortedLetters;
+        System.out.println(listSortedCharacters);
+        game.getCreatedWordByUserOne(userInteraction.getStr());
+        //game1.cloneList();
+        //listSortedLetters = clonedListSortedLetters;
+        System.out.println(listSortedCharacters);
+        game.getCreatedWordByUserTwo(userInteraction.getStr());
+        game.checkLenghtOfWord();
+        System.out.println(game.countUserOne + " user one");
+        System.out.println(game.countUserTwo + " user two");
+
+
+
+
+    }
+
+
+
 }
