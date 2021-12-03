@@ -24,7 +24,6 @@ public class Letters {
         wordsCanBeWritten = new ArrayList<String>();
         listSortedCharacters =  new ArrayList<String>();
         // INIT DICTIONNARY For each loop HERE
-        Dictionary.initContent();
         countCalcDict = 0;
     }
 

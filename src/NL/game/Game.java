@@ -18,6 +18,7 @@ public class Game {
 
     public void gameWelcome() throws IOException {
         userInteraction.display(menu.getWelcomeMsg());
+        Dictionary.initContent();
         gameMenu();
     }
 
