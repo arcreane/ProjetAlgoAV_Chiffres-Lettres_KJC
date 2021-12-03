@@ -1,5 +1,7 @@
 package NL.game;
 
+//import NL.game.logic.Letters;
+import NL.game.logic.Numbers;
 import NL.game.logic.Letters;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public class Game {
     UserInteraction userInteraction = new UserInteraction();
     Menu menu = new Menu();
     User[] players = new User[2];
+    Numbers numbers = new Numbers();
 
     public void gameWelcome() {
         userInteraction.display(menu.getWelcomeMsg());
@@ -30,6 +33,8 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
+        userInteraction.displayNumbersMenu();
+        for(int turn = 1; turn <= 3; turn++) {
 
         // First loop for gameLoop
         Letters game1 = new Letters();
@@ -77,6 +82,13 @@ public class Game {
 //            Numbers game2 = new Numbers();
 //            game2.test();
 
+        int plates = 1;
+        while(plates <= 6) {
+            userInteraction.displaySelectOption();
+            int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
+            plates += menu.managePlateChoice(rank, this);
+        }
+        userInteraction.displayPlates(Numbers.plates);
     }
 
     public void playerVSPlayer() {
@@ -97,35 +109,4 @@ public class Game {
     public void exit() {
         System.exit(0);
     }
-
-
-
-    public void loopForChoosingVowelOrConsonant(Letters game){
-        for(int turn = 1; turn <= 5; turn++) {
-            userInteraction.askUserOneVowelOrKonsonant();
-            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
-            userInteraction.askUserTwoVowelOrKonsonant();
-            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
-        }
-    }
-    public void getDataWordForEachUser(Letters game){
-        //game1.cloneList();
-        //listSortedLetters = clonedListSortedLetters;
-        System.out.println(listSortedCharacters);
-        game.getCreatedWordByUserOne(userInteraction.getStr());
-        //game1.cloneList();
-        //listSortedLetters = clonedListSortedLetters;
-        System.out.println(listSortedCharacters);
-        game.getCreatedWordByUserTwo(userInteraction.getStr());
-        game.checkLenghtOfWord();
-        System.out.println(game.countUserOne + " user one");
-        System.out.println(game.countUserTwo + " user two");
-
-
-
-
-    }
-
-
-
 }

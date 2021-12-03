@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Dictionary {
@@ -15,6 +14,9 @@ public class Dictionary {
     public static ArrayList<String> dictionaryArray = new ArrayList<String>();
     List<Character> test = new ArrayList<Character>();
 
+    List<String> dictionary = new ArrayList<>();
+
+    public void initContent() {
     public static void initContent() {
         String os_path = "src/french_list.txt";
 
