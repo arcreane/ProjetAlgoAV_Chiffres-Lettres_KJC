@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Numbers {
 
-    List<Integer> plates = new ArrayList<>();
+    public static final List<Integer> plates = new ArrayList<>();
 
     public static List<Integer> rank1 = new ArrayList<>()
     {{ for(int numbers = 1; numbers < 9; numbers++) { add(numbers); add(numbers); } }};

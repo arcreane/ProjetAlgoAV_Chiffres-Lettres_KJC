@@ -34,6 +34,7 @@ public class Game {
             int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
             plates += menu.managePlateChoice(rank, this);
         }
+        userInteraction.displayPlates(Numbers.plates);
     }
 
     public void playerVSPlayer() {

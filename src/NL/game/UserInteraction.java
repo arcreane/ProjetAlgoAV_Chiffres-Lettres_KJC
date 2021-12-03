@@ -1,5 +1,6 @@
 package NL.game;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInteraction {
@@ -96,5 +97,9 @@ public class UserInteraction {
 
     public void emptyPlates(String rank) {
         System.out.println(ANSI_RED +  "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
+    }
+
+    public void displayPlates(List<Integer> plates) {
+        System.out.println("Your plates during this game will be : " + plates);
     }
 }
