@@ -3,8 +3,13 @@ package NL.game.logic;
 import java.util.*;
 
 public class Numbers {
+    public static List<Integer> plates = new ArrayList<>();
 
-    public static final List<Integer> plates = new ArrayList<>();
+    public Numbers() {
+        plates = new ArrayList<>();
+    }
+
+
 
     public static List<Integer> rank1 = new ArrayList<>()
     {{ for(int numbers = 1; numbers < 9; numbers++) { add(numbers); add(numbers); } }};
@@ -58,7 +63,7 @@ public class Numbers {
         return selectedRand;
     }
 
-    private int utilsRand(int min, int max) {
+    public static int utilsRand(int min, int max) {
 
         if (min > max) {
             throw new IllegalArgumentException("max must be greater than min");

@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 public class Dictionary {
     //public static List<String> dictionary = new ArrayList<>();
     public static ArrayList<String> dictionaryArray = new ArrayList<String>();
-    List<Character> test = new ArrayList<Character>();
+    //List<Character> test = new ArrayList<Character>();
 
-    List<String> dictionary = new ArrayList<>();
+    //List<String> dictionary = new ArrayList<>();
 
-    public void initContent() {
+    //public void initContent() {
     public static void initContent() {
         String os_path = "src/french_list.txt";
 

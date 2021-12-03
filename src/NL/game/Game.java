@@ -1,12 +1,11 @@
 package NL.game;
 
 //import NL.game.logic.Letters;
+
 import NL.game.logic.Numbers;
 import NL.game.logic.Letters;
 
-import java.util.ArrayList;
-
-import static NL.game.Dictionary.dictionaryArray;
+import static NL.game.Menu.numberPlates;
 import static NL.game.logic.Letters.*;
 
 public class Game {
@@ -33,20 +32,41 @@ public class Game {
         int choice = userInteraction.getUserChoice(Menu.subOptions.length);
         menu.manageSubChoice(choice, this);
 
-        userInteraction.displayNumbersMenu();
-        for(int turn = 1; turn <= 3; turn++) {
 
-        // First loop for gameLoop
-        Letters game1 = new Letters();
-        do {
-            new Letters();
+        //for (int turn = 1; turn <= 3; turn++) {
 
-            //-------- loop for getting 10 characters ----------
-            loopForChoosingVowelOrConsonant(game1);
+            // First loop for gameLoop
+            Letters game1 = new Letters();
+            Numbers number1 = new Numbers();
+            do {
+                new Letters();
+                new Numbers();
+                // LETTERS GAME
+                //-------- loop for getting 10 characters ----------
+                loopForChoosingVowelOrConsonant(game1);
+                //-------------------------------
+                game1.loopWordsDictionary();
+                //-----------------------------
+                getDataWordForEachUser(game1);
+
+                // --------------------------------------------------------
+
+                // NUMBER GAME
+                System.out.println("numberGame");
+                // AFFICHE MENU
+                userInteraction.displayNumbersMenu();
+                // INPUT UTILISATEUR
+                numberGame();
 
 
-            // --------------------------------------------------------
-            game1.loopWordsDictionary();
+
+                rounds++;
+                System.out.println(rounds);
+            } while (rounds < 3);
+
+
+            // TEST-----------------------------------------
+
 //            //loop on words of dictionnary
 //            for (String word : dictionaryArray ){
 //                if ( word.length() <= listSortedCharacters.size() ) {
@@ -58,19 +78,8 @@ public class Game {
 //            System.out.println("words can be written with these characters :  "+ wordsCanBeWritten) ;
 
 
+                // ----------- getting each word from each user ------------------
 
-
-
-
-
-            // ----------- getting each word from each user ------------------
-            getDataWordForEachUser(game1);
-
-
-
-            rounds++;
-            System.out.println(rounds);
-        } while (rounds <3);
 
 
 
@@ -82,31 +91,70 @@ public class Game {
 //            Numbers game2 = new Numbers();
 //            game2.test();
 
+
+
+        }
+//    }
+
+        public void playerVSPlayer () {
+            for (int p = 0; p <= 1; p++) {
+                userInteraction.askUsername();
+                String playerName = userInteraction.getUserChoice();
+                players[p] = new User(playerName);
+            }
+        }
+
+        public void playerVSAI () {
+            userInteraction.askUsername();
+            String playerName = userInteraction.getUserChoice();
+            players[0] = new User(playerName);
+            players[1] = new User("AI");
+        }
+
+        public void exit () {
+            System.exit(0);
+        }
+
+
+
+
+
+    public void loopForChoosingVowelOrConsonant(Letters game) {
+        for (int turn = 1; turn <= 5; turn++) {
+            userInteraction.askUserOneVowelOrKonsonant();
+            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+            userInteraction.askUserTwoVowelOrKonsonant();
+            game.creatingRandomCharsFromAskingEachPlayer((userInteraction.getStr()));
+        }
+    }
+
+    public void getDataWordForEachUser(Letters game) {
+        //game1.cloneList();
+        //listSortedLetters = clonedListSortedLetters;
+        System.out.println(listSortedCharacters);
+        game.getCreatedWordByUserOne(userInteraction.getStr());
+        //game1.cloneList();
+        //listSortedLetters = clonedListSortedLetters;
+        System.out.println(listSortedCharacters);
+        game.getCreatedWordByUserTwo(userInteraction.getStr());
+        game.checkLenghtOfWord();
+        System.out.println(game.countUserOne + " user one");
+        System.out.println(game.countUserTwo + " user two");
+
+
+    }
+
+    public void numberGame(){
+        int binary = 0;
         int plates = 1;
-        while(plates <= 6) {
-            userInteraction.displaySelectOption();
-            int rank = userInteraction.getUserChoice(Menu.numberPlates.length);
+        while (plates <= 6) {
+            userInteraction.displaySelectOption(binary++);
+            int rank = userInteraction.getUserChoice(numberPlates.length);
             plates += menu.managePlateChoice(rank, this);
         }
         userInteraction.displayPlates(Numbers.plates);
-    }
+        int random = Numbers.utilsRand(100, 999);
+        System.out.println(random);
 
-    public void playerVSPlayer() {
-        for(int p = 0; p <= 1; p++) {
-            userInteraction.askUsername();
-            String playerName = userInteraction.getUserChoice();
-            players[p] = new User(playerName);
-        }
-    }
-
-    public void playerVSAI() {
-        userInteraction.askUsername();
-        String playerName = userInteraction.getUserChoice();
-        players[0] = new User(playerName);
-        players[1] = new User("AI");
-    }
-
-    public void exit() {
-        System.exit(0);
     }
 }

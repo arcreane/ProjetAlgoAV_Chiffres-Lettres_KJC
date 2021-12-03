@@ -3,6 +3,8 @@ package NL.game;
 import java.util.List;
 import java.util.Scanner;
 
+import static NL.game.logic.Numbers.plates;
+
 public class UserInteraction {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -32,11 +34,11 @@ public class UserInteraction {
         System.out.println(
                 """
 
-                +-------------- +\s
-                |  Game Menu :  |""");
+                        +-------------- +\s
+                        |  Game Menu :  |""");
 
         int number = 1;
-        for(String option : mainOptions) {
+        for (String option : mainOptions) {
             System.out.println("|  " + number++ + ". " + option + " |");
         }
         System.out.println("+---------------+");
@@ -47,7 +49,7 @@ public class UserInteraction {
         System.out.println("\nWould you like to play against a friend or the game AI ?");
 
         int number = 1;
-        for(String option : subOptions) {
+        for (String option : subOptions) {
             System.out.println("For " + option + ", please enter \"" + number++ + "\".");
         }
         System.out.print("\nPlease select your option : ");
@@ -65,8 +67,14 @@ public class UserInteraction {
         System.out.println("For the rank 3, there is 2 plates of 75 and 2 plates of 100.");
     }
 
-    public void displaySelectOption() {
-        System.out.print("\nPlease select your option : ");
+    public void displaySelectOption(int binary) {
+        if (binary%2 == 0){
+            System.out.print("\nUSER 1 Please select your option : ");
+        }
+        else {
+            System.out.print("\nUSER 2 Please select your option : ");
+        }
+
     }
 
     public void askUsername() {
@@ -101,26 +109,27 @@ public class UserInteraction {
     }
 
 
-    public void askUserOneVowelOrKonsonant(){
+    public void askUserOneVowelOrKonsonant() {
         System.out.println("playerOne " + "What kind of letter do you want ?\n"); //TODO make player one dynamique
         System.out.println("write consonant or vowel");
-    public void emptyPlates(String rank) {
-        System.out.println(ANSI_RED +  "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
     }
 
-    public void displayPlates(List<Integer> plates) {
-        System.out.println("Your plates during this game will be : " + plates);
-    public void askUserTwoVowelOrKonsonant(){
-        System.out.println("player Two "+ " What kind of letter do you want ?\n"); //TODO make player Two dynamique
+    public void askUserTwoVowelOrKonsonant () {
+        System.out.println("player Two " + " What kind of letter do you want ?\n"); //TODO make player Two dynamique
         System.out.println("write consonant or vowel");
     }
 
 
+        public void displayPlates (List < Integer > plates) {
+            System.out.println("Your plates during this game will be : " + plates);
+        }
+        public void emptyPlates (String rank){
+            System.out.println(ANSI_RED + "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
+        }
 
 
+    }
 
-
-
-
-
-}
+//
+//    public void askUserTwoVowelOrKonsonant() {
+//    }
