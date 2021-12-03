@@ -9,14 +9,15 @@ import static NL.game.Dictionary.dictionaryArray;
 public class Letters {
     public static ArrayList<String> listSortedCharacters = new ArrayList<String>();
     public static  ArrayList<String> wordsCanBeWritten = new ArrayList<String>();
-    String wordCreatedByUserOne;
-    String wordCreatedByUserTwo;
-    public int countUserOne = 0;
-    public int countUserTwo = 0;
+    public String wordCreatedByUserOne;
+    public String wordCreatedByUserTwo;
     static int countCalcDict = 0;
-    boolean correctWordUserOne;
-    boolean correctWordUserTwo;
+    public boolean correctWordUserOne;
+    public boolean correctWordUserTwo;
 
+    public static ArrayList<String> getListSortedCharacters() {
+        return listSortedCharacters;
+    }
 
     // -------- constructor for refresh all arrayList
     public Letters() {
@@ -37,8 +38,6 @@ public class Letters {
 // ---------------------- DEPENDANT FOREACH USERS CHOICE --------------------
 
     public void creatingRandomCharsFromAskingEachPlayer(String letter) {
-        System.out.println(countCalcDict);
-
 
         String consonants = "bcdfghjklmnpqrstvwxz";
         String vowels = "aeiouy";
@@ -62,59 +61,38 @@ public class Letters {
 
 
     // ------------- USER ONE ------------------
-    public void getCreatedWordByUserOne(String word){
+    public boolean getCreatedWordByUserOne(String word){
         wordCreatedByUserOne = (word);
 
         // add condition if word exists or no
         if (wordsCanBeWritten.contains(wordCreatedByUserOne)) {
             correctWordUserOne = true;
+            return true;
         }
         else {
             correctWordUserOne = false;
+            return false;
         }
-
     }
     //-----------------------------------------------------------------------------
 
     // --------- USER TWO ------------------
-    public void getCreatedWordByUserTwo(String word) {
+    public boolean getCreatedWordByUserTwo(String word) {
         wordCreatedByUserTwo = (word);
 
         // add condition if word exists or no
         if (wordsCanBeWritten.contains(wordCreatedByUserTwo)){
             correctWordUserTwo = true;
+            return true;
         }
         else {
             correctWordUserTwo = false;
+            return false;
         }
     }
     // -------------------------------------------------------------------------------------
 
     // ----- LOOKING FOR LONGEST WORD CREATED BY USERS TO DETERMINED WINNER ---------------
-
-    public void checkLenghtOfWord(){
-        System.out.println(countCalcDict);
-        if (correctWordUserOne == true && correctWordUserTwo == true){
-            if (wordCreatedByUserOne.length() == wordCreatedByUserTwo.length()){
-                countUserOne +=1;
-                countUserTwo +=1;
-            }
-            else if (wordCreatedByUserOne.length() > wordCreatedByUserTwo.length()){
-                countUserOne += 1;
-            }
-            else {
-                countUserTwo += 1;
-            }
-        }
-        else if (correctWordUserOne == true && correctWordUserTwo == false){
-            countUserOne += 1;
-        }
-        else if (correctWordUserTwo == true && correctWordUserOne == false){
-            countUserTwo += 1;
-        }
-    }
-
-
 
     // ------------------------------ ALGO AI ----------------------------------
 
@@ -151,7 +129,6 @@ public class Letters {
                     wordsCanBeWritten.remove(0);
                 }
             }
-            System.out.println(wordsCanBeWritten);
 
 
 

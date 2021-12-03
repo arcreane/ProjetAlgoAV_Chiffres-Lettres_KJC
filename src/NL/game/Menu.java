@@ -2,15 +2,20 @@ package NL.game;
 
 import NL.game.logic.Numbers;
 
+import java.io.IOException;
+import java.util.Objects;
+
 public class Menu {
 
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_RESET = "\u001B[0m";
     public static final String[] mainOptions = new String[]{"Play", "Exit"};
     public static final String[] subOptions = new String[]{"Player vs AI", "Player vs Player"};
     public static final String[] numberPlates = new String[] {"Rang 1", "Rang 2", "Rang 3"};
 
     public String getWelcomeMsg() {
         return
-                """
+                ANSI_PURPLE + """
                              _   _                 _                          ___            _        _          _   _               \s
                             | \\ | |               | |                        / _ \\          | |      | |        | | | |              \s
                             |  \\| |_   _ _ __ ___ | |__   ___ _ __ ___      / /_\\ \\_ __   __| |      | |     ___| |_| |_ ___ _ __ ___\s
@@ -21,17 +26,17 @@ public class Menu {
                                         
                         Welcome to the numbers and letters game !
                         The game will start soon..
-                        """;
+                        """ + ANSI_RESET ;
     }
 
-    public void manageMainChoice(int choice, Game game) {
+    public void manageMainChoice(int choice, Game game) throws IOException {
         switch (choice) {
             case 1 -> game.start();
             case 2 -> game.exit();
         }
     }
 
-    public void manageSubChoice(int choice, Game game) {
+    public void manageSubChoice(int choice, Game game) throws IOException {
         switch (choice) {
             case 1 -> game.playerVSAI();
             case 2 -> game.playerVSPlayer();
@@ -54,5 +59,23 @@ public class Menu {
         else game.numbers.addPlates(game.numbers.setPlates(choice));
         
         return 1;
+    }
+
+    public void manageWhichPlayerAnswer(String player1,String player2, Game game) throws IOException {
+        int check = 0;
+        while(check == 0) {
+            game.userInteraction.displayWhichPlayerAnswer();
+            String name = game.userInteraction.getUserChoice();
+
+            if(Objects.equals(name, player1)) {
+                game.playerAnswer(0, player1);
+                check++;
+            }
+            else if (Objects.equals(name, player2)) {
+                game.playerAnswer(1, player2);
+                check++;
+            }
+            else game.userInteraction.askAgain();
+        }
     }
 }

@@ -1,15 +1,21 @@
 package NL.game;
 
+import NL.game.logic.Numbers;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
+import static NL.game.logic.Letters.getListSortedCharacters;
 import static NL.game.logic.Numbers.plates;
 
 public class UserInteraction {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
 
-    Scanner input = new Scanner(System.in);
+    BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     int menuInput;
     String strInput;
     String str;
@@ -18,12 +24,12 @@ public class UserInteraction {
         return menuInput = validateIntegerInput(optionsMax);
     }
 
-    public String getUserChoice() {
+    public String getUserChoice() throws IOException {
         return strInput = validateStringInput();
     }
 
-    public String getStr() {
-        return str = input.nextLine();
+    public String getStr() throws IOException {
+        return str = input.readLine();
     }
 
     public void display(String welcomeMsg) {
@@ -33,13 +39,12 @@ public class UserInteraction {
     public void displayMainMenu(String[] mainOptions) {
         System.out.println(
                 """
-
                         +-------------- +\s
                         |  Game Menu :  |""");
 
         int number = 1;
         for (String option : mainOptions) {
-            System.out.println("|  " + number++ + ". " + option + " |");
+            System.out.println("|  " + number++ + ". " + option + "      |");
         }
         System.out.println("+---------------+");
         System.out.print("Please select your option : ");
@@ -67,14 +72,8 @@ public class UserInteraction {
         System.out.println("For the rank 3, there is 2 plates of 75 and 2 plates of 100.");
     }
 
-    public void displaySelectOption(int binary) {
-        if (binary%2 == 0){
-            System.out.print("\nUSER 1 Please select your option : ");
-        }
-        else {
-            System.out.print("\nUSER 2 Please select your option : ");
-        }
-
+    public void displaySelectOption(String name) {
+        System.out.print("\n" + name + ", please select your option : ");
     }
 
     public void askUsername() {
@@ -86,14 +85,14 @@ public class UserInteraction {
         int inputVerified;
         do {
             try {
-                inputVerified = Integer.parseInt(input.nextLine());
+                inputVerified = Integer.parseInt(input.readLine());
                 if (inputVerified < 1 || inputVerified > optionsMax) {
                     System.out.println(ANSI_RED + "\nThe number provided doesn't match the options [1 or " + optionsMax + "]." +
                             "\nPlease try again.\n" + ANSI_RESET);
                     System.out.print("Please select your option : ");
                     inputVerified = -1;
                 }
-            } catch (NumberFormatException nfe) {
+            } catch (NumberFormatException | IOException nfe) {
                 System.out.println(ANSI_RED + "\nInvalid option format.\nPlease try again.\n" + ANSI_RESET);
                 System.out.print("Please select your option : ");
                 inputVerified = -1;
@@ -103,33 +102,80 @@ public class UserInteraction {
         return inputVerified;
     }
 
-    public String validateStringInput() {
+    public String validateStringInput() throws IOException {
         // Limit the number of characters.
-        return input.nextLine();
+        return input.readLine();
     }
 
 
-    public void askUserOneVowelOrKonsonant() {
-        System.out.println("playerOne " + "What kind of letter do you want ?\n"); //TODO make player one dynamique
-        System.out.println("write consonant or vowel");
+    public void askUserOneVowelOrKonsonant(String player) {
+        System.out.println("\n" + player + ", what type of letter do you want ?");
+        System.out.print("Write a consonant or a vowel as \"c\" or \"v\" : ");
     }
 
-    public void askUserTwoVowelOrKonsonant () {
-        System.out.println("player Two " + " What kind of letter do you want ?\n"); //TODO make player Two dynamique
-        System.out.println("write consonant or vowel");
+    public void displayPlates(List<Integer> plates) {
+        System.out.println("\nYour plates during this game will be : " + plates + "\n" +
+                "The number you will need to reach will be : " + Numbers.randomNumber + "\n");
+    }
+    public void emptyPlates (String rank){
+        System.out.println(ANSI_RED + "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
     }
 
-
-        public void displayPlates (List < Integer > plates) {
-            System.out.println("Your plates during this game will be : " + plates);
-        }
-        public void emptyPlates (String rank){
-            System.out.println(ANSI_RED + "\nSorry but the box " + rank + " doesn't contain any more plate." + ANSI_RESET);
-        }
-
-
+    public void displayWhichPlayerAnswer() {
+        System.out.print("If you wish to give an answer, please enter your username : ");
     }
 
-//
-//    public void askUserTwoVowelOrKonsonant() {
-//    }
+    public void askForAnswer(String name) {
+        System.out.print(name  + ", please enter your answer : ");
+    }
+
+    public void displayRound(int rounds) {
+        System.out.println(
+                "\n+-------------+" +
+                "| ROUND : " + rounds + " |" +
+                "+-------------+");
+    }
+
+    public void displayLetterGame() {
+        System.out.println(
+                """
+                                        
+                                        
+                \t\s\s+----------------------------+
+                \t\s\s| Letters Game is starting ! |
+                \t\s\s+----------------------------+""");
+    }
+
+    public void displayNumbersGame() {
+        System.out.println(
+                """
+                                        
+                                        
+                \t\s\s+----------------------------+
+                \t\s\s| Numbers Game is starting ! |
+                \t\s\s+----------------------------+""");
+    }
+
+    public void askAgain() {
+        System.out.println(ANSI_RED + "\nThis username doesn't exist, please try again.\n" + ANSI_RESET);
+    }
+
+    public void displayGamePoint(User user1, User user2) {
+        System.out.println(
+                ANSI_RED + user1.getPlayer() + " has : " + user1.getPoint() + " points."+
+                "\n   VS\n" +
+                user2.getPlayer() + " has : " + user2.getPoint() + " points." + ANSI_RESET);
+    }
+
+    public void displayEquality() {
+        System.out.println("\nUnfortunately it's a draw.");
+    }
+
+    public void displayWinner(User user) {
+        System.out.println("\nWinner is " + user.getPlayer() + " !");
+    }
+
+    public void displayCharactersCollections() {
+        System.out.println("\nHere's the list you will use to create the largest word you can : " + getListSortedCharacters());
+    }
+}

@@ -1,12 +1,9 @@
 package NL.game;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
-        int a = 50;
-        int b = 4;
-        System.out.println(a%b);
-
-
+    public static void main(String[] args) throws IOException {
         Game game = new Game();
         game.gameWelcome();
     }
