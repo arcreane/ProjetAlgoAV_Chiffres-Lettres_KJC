@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Timer {
 
     public static void timer(Game game) throws IOException {
-        int count = 10;
+        int count = 1;
         long startTime;
         System.out.println("\nYou have 60 seconds to think about your answer.");
         while (count > 0) {
@@ -18,7 +18,7 @@ public class Timer {
             }
         }
 
-        count = 5;
+        count = 1;
         boolean tryingToStop = true;
         System.out.println("\nYou have 30 seconds left to enter your answer.\n");
         startTime = System.currentTimeMillis();

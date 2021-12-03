@@ -5,10 +5,18 @@ import NL.game.User;
 import java.util.*;
 
 public class Numbers {
-    public static List<Integer> plates = new ArrayList<>();
+    public static ArrayList<Integer> plates = new ArrayList<>();
 
     public Numbers() {
         plates = new ArrayList<>();
+        rank1 = new ArrayList<>()
+        {{ for(int numbers = 1; numbers < 9; numbers++) { add(numbers); add(numbers); } }};
+
+        rank2 = new ArrayList<>()
+        {{ for(int numbers = 25; numbers <= 50; numbers = numbers + 25) { add(numbers); add(numbers); } }};
+
+        rank3 = new ArrayList<>()
+        {{ for(int numbers = 75; numbers <= 100; numbers = numbers + 25) { add(numbers); add(numbers); } }};
     }
 
     public static List<Integer> rank1 = new ArrayList<>()
